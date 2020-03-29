@@ -10,4 +10,4 @@ class Contact(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return 'message from ' + self.name
