@@ -1,11 +1,24 @@
 {% extends 'base.html' %}
-{% block title %}Blog{% endblock title %}
-{% block blogactive %}active
-{% endblock blogactive %}
+{% block title %}Search Results{% endblock title %}
+
 {% block body %}
 <div class="container my-4">
 
-    <h2>Popular articles by us</h2>
+    <h2>Search Results:</h2>
+    {% if allposts|length < 1 %}
+    <p>No search result</p>
+    Your search -<b>{{query}}</b>- did not match any result<br>
+    Suggestions:
+    <ul>
+    <li>
+    Make sure that all words are spelled correctly.</li>
+    <li>
+    Try different keywords.</li>
+    <li>
+    Try more general keywords.</li>
+    <li>
+    Try fewer keywords.</li></ul>
+    {% endif %}
 {% for post in allposts %}
     <div class="row no-gutters border rounded overflow-hidden flex-md-row my-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">

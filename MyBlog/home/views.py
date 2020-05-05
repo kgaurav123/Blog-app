@@ -3,6 +3,7 @@ from django.contrib import messages
 # Create your views here.
 from django.shortcuts import render,HttpResponse
 from.models import Contact
+from Blog.models import Post
 # Create your views here.
 def home(request):
     return render(request,'home/home.html')
@@ -22,3 +23,17 @@ def contact(request):
 
 def about(request):
     return render(request,'home/about.html')
+def search(request):
+    query=request.GET['query']
+    if len(query)>78:
+        allposts = Post.objects.none()
+    else:
+        allpostsTitle = Post.objects.filter(title__icontains=query)
+        allpostsContent = Post.objects.filter(content__icontains=query)
+        allpostsAuthor = Post.objects.filter(author__icontains=query)
+        allpoststimestamp = Post.objects.filter(timestamp__icontains=query)
+        allposts=allpostsTitle.union(allpostsContent, allpostsAuthor, allpoststimestamp)
+    if allposts.count() == 0:
+        messages.error(request,'No such result found,please refine your search')
+    params={'allposts':allposts,'query':query}
+    return render(request,'home/search.html',params)
