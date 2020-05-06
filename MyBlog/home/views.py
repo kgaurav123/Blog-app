@@ -6,7 +6,9 @@ from.models import Contact
 from Blog.models import Post
 # Create your views here.
 def home(request):
-    return render(request,'home/home.html')
+    allposts=Post.objects.all()[:3]
+    context={'allposts':allposts}
+    return render(request,'home/home.html',context)
 def contact(request):
     if request.method=='POST':
         name = request.POST['name']

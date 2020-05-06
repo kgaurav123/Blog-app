@@ -4,28 +4,63 @@
 {% endblock homeactive %}
 {% block body %}
 <div class="container">
-    <div class="jumbotron my-4">
-        <h1 class="display-4">Welcome to the blog</h1>
-        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
-            featured content or information.</p>
-        <hr class="my-3">
-        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-        <a class="btn btn-primary btn-lg" href="/blog" role="button">Go to blog</a>
-    </div>
+  <div class="jumbotron my-4">
+    <h1 class="display-4">Welcome to the blog</h1>
+    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
+      featured content or information.</p>
+    <hr class="my-3">
+    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+    <a class="btn btn-primary btn-lg" href="/blog" role="button">Go to blog</a>
+  </div>
 </div>
 <div class="container">
   <h2>Popular Blogposts</h2>
-        <div class="row no-gutters border rounded overflow-hidden flex-md-row my-4 shadow-sm h-md-250 position-relative">
-          <div class="col p-4 d-flex flex-column position-static">
-            <strong class="d-inline-block mb-2 text-primary">World</strong>
-            <h3 class="mb-0">Featured post</h3>
-            <div class="mb-1 text-muted">Nov 12</div>
-            <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="stretched-link">Continue reading</a>
-          </div>
-          <div class="col-auto d-none d-lg-block">
-         </div>
+  {% for i in allposts %}
+  <div class="row no-gutters border rounded overflow-hidden flex-md-row my-4  shadow-sm h-md-250 position-relative">
+    <div class="col p-4 d-flex flex-column position-static">
+      <strong class="d-inline-block mb-2 text-primary">{{i.author}}</strong>
+      <h3 class="mb-0">{{i.title}}</h3>
+      <div class="mb-1 text-muted">{{i.timestamp}}</div>
+      <p class="card-text mb-auto">{{i.content | truncatechars:560 }}</p>
+      <div style="text-align: end;">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{i.slug | truncatechars:5 }}">
+          Details
+        </button>
+      </div>
+      <div class="col-auto d-none d-lg-block">
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="{{i.slug | truncatechars:5 }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{i.title}} by {{i.author}}</h5>
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+
+
         </div>
-     
+        <div class="container">{{i.timestamp}}</div>
+        <div class="modal-body">
+          {{i.content}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<div class="container" style="text-align:center;">
+  <a class="btn btn-primary btn-md mb-4" href="/blog" role="button">Read More Blogs</a>
 </div>
 {% endblock body %}
