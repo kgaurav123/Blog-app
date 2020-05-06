@@ -6,7 +6,7 @@ from.models import Contact
 from Blog.models import Post
 # Create your views here.
 def home(request):
-    allposts=Post.objects.all()[:3]
+    allposts=Post.objects.all()[:2]
     context={'allposts':allposts}
     return render(request,'home/home.html',context)
 def contact(request):
@@ -39,3 +39,9 @@ def search(request):
         messages.error(request,'No such result found,please refine your search')
     params={'allposts':allposts,'query':query}
     return render(request,'home/search.html',params)
+
+def handlesignup(request):
+    return render(request,'home/signup.html')
+
+def handlelogin(request):
+    return render(request,'home/login.html') 

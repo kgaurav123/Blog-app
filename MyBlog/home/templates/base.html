@@ -38,15 +38,21 @@
 
 
       </ul>
-      <form method="get" action="/search" class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" name="query" id="query" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-      <a role='button' href='/admin' target="_blank" class="btn btn-outline-success m-2 my-sm-0">Admin Panel</a>
+
+
+      <a role='button' href='/login' class="btn btn-success m-1">Login</a>
+
+      <a role='button' href='/signup' class="btn btn-success m-1">Signup</a>
     </div>
   </nav>
-
-{% for message in messages %}
+  <div class="container my-3"">
+    <form method="get" action="/search" class="">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" name="query" id="query"
+        aria-label="Search">
+      <button class="btn btn-success my-2" type="submit">Search</button>
+    </form>
+  </div>
+  {% for message in messages %}
   <div class="alert alert-{{ message.tags }} mb-0 alert-dismissible fade show" role="alert">
     <strong>Message:</strong>{{message}}
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
