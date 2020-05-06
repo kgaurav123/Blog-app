@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.contrib.auth.models import User
 from django.contrib import messages
+from django.utils import timezone
 # Create your views here.
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,redirect
 from.models import Contact
 from Blog.models import Post
 # Create your views here.
@@ -41,7 +42,37 @@ def search(request):
     return render(request,'home/search.html',params)
 
 def handlesignup(request):
-    return render(request,'home/signup.html')
+    if request.method=='POST':
+        username = request.POST['username']
+        fname = request.POST['fname']
+        lname = request.POST['lname']
+        email = request.POST['email']
+        pass1 = request.POST['pass1']
+        pass2 = request.POST['pass2']
+        #check for erroneous inputs
+        if len(username) > 15:
+            messages.error(request,'Your username should be under 10 characters')
+            return redirect('handlesignup')
+        
+        if not username.isalnum():
+            messages.error(request,'Username should only consists of alphabets and number')
+            return redirect('handlesignup')
+            
+        if pass1 != pass2:
+            messages.error(request,'Passwords do not match')
+            return redirect('handlesignup')
 
+        #create the user
+        myuser = User.objects.create_user(username, email, pass1)
+        myuser.first_name = fname
+        myuser.last_name = lname
+        myuser.save()
+        messages.success(request,'Your account has been successfully created,Login here')
+        return redirect('handlesignup')
+    else:
+        return render(request,'home/signup.html')
+    
+        
+    
 def handlelogin(request):
     return render(request,'home/login.html') 

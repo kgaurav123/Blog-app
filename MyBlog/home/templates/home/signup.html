@@ -6,14 +6,15 @@
 <div class="container my-3">
 <h1 style="font-weight:500;">
 Signup Here</h1>
-<form>
+<form action='/signup' method='post'>
+  {% csrf_token %}
   <div class="form-group">
     <label for="username">Username</label>
-    <input type="text" class="form-control" id="username" name="username" placeholder="Enter your unique username">
+    <input type="text" class="form-control" id="username" name="username" placeholder="Choose a unique username(alphanumeric)" required>
   </div>
     <div class="form-group">
     <label for="fname">First name</label>
-    <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter First name">
+    <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter First name" required>
   </div>
     <div class="form-group">
     <label for="lname">Last name</label>
@@ -21,15 +22,15 @@ Signup Here</h1>
   </div>
   <div class="form-group">
     <label for="email">Email address</label>
-    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address">
+    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address" required>
   </div>
   <div class="form-group">
     <label for="pass1">Password</label>
-    <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Choose your password">
+    <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Choose your password" required>
   </div>
    <div class="form-group">
     <label for="pass2">Confirm your Password</label>
-    <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Enter your password again">
+    <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Enter your password again" required>
   </div>
    <button type="submit" class="btn btn-primary my-3">Register</button>
 </form></div>
