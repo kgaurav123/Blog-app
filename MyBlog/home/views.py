@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.shortcuts import render,HttpResponse,redirect
 from.models import Contact
 from Blog.models import Post
+from django.contrib.auth import authenticate,login, logout
 # Create your views here.
 def home(request):
     allposts=Post.objects.all()[:2]
@@ -75,4 +76,23 @@ def handlesignup(request):
         
     
 def handlelogin(request):
+    if request.method == 'POST':
+        loginusername = request.POST['loginusername']
+        loginpass = request.POST['loginpass']
+        
+        user = authenticate(username=loginusername,password=loginpass)
+        if user is not None:
+            login(request, user)
+            messages.success(request,'Successfully logged in')
+            return redirect('home')
+        else:
+            messages.error(request,'Invalid Credentials')
+            return redirect('handlelogin')
     return render(request,'home/login.html') 
+        
+def handlelogout(request):
+    logout(request)
+    messages.success(request,'Successfully logged out')
+    return redirect('home')
+    return HttpResponse('logout')
+    
