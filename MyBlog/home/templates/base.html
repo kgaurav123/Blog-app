@@ -38,31 +38,43 @@
 
 
       </ul>
-      <form method="get" action="/search" class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" name="query" id="query"
-          aria-label="Search">
-        <button class="btn btn-outline-success my-2" type="submit">Search</button>
-      </form>
-      {% if user.is_authenticated %}
-      you are logged in as {{request.user}}
-      {% else %}
-      <a role='button' href='/login' class="btn btn-success m-1">Login</a>
-
-      <a role='button' href='/signup' class="btn btn-success m-1">Signup</a>
-      {% endif %}
+      <div class="ml-auto form-inline">
+        {% if user.is_authenticated %}
+        
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Welcome {{request.user}}
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a class="dropdown-item mr-1" href="/logout">Logout</a>
+            </div>
+          </li></ul>
+          {% else %}
+          <a role='button' href='/login' class="btn btn-success m-1">Login</a>
+          
+          <a role='button' href='/signup' class="btn btn-success m-1">Signup</a>
+          {% endif %}
+          <form method="get" action="/search" class=" my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" name="query" id="query"
+              aria-label="Search">
+            <button class="btn btn-outline-success my-2" type="submit">Search</button>
+          </form>
+        </div>
     </div>
   </nav>
   <div class="container my-3"">
     
   </div>
   {% for message in messages %}
-  <div class=" alert alert-{{ message.tags }} mb-0 alert-dismissible fade show" role="alert">
+  <div class=" alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
     <strong>Message:</strong>{{message}}
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   {% endfor %}
+
   {% block body %} {% endblock body %}
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
