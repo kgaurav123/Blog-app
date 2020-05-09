@@ -4,10 +4,14 @@
 {% endblock blogactive %}
 {% block body %}
 <div class="container my-3">
+        {% if user.is_authenticated %}
         <h2 class="blog-post-title">{{post.title}}</h2>
         <p class="blog-post-meta">{{post.timestamp}} by <a href="/about">{{post.author}}</a></p>
 
         <p>{{post.content}}</p>
         <hr>
-        </div>
+        {% else %}
+        <h3>Login to see result</h1>
+        {% endif %}
+</div>
 {% endblock body %}

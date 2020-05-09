@@ -4,6 +4,7 @@
  {% block contactactive %}active
 {% endblock contactactive %}
 {% block body %}
+{% if user.is_authenticated %}
 <div class="container my-4" style="width: 50%;">
     <h1>Contact Form</h1>
     <form method="post" action="/contact">
@@ -29,4 +30,8 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
+{% else %}
+<div class="container">
+<h1>Login in order to fill the contact form </h1></div>
+{% endif %}
 {% endblock body %}

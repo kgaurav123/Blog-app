@@ -13,6 +13,7 @@
     <a class="btn btn-primary btn-lg" href="/blog" role="button">Go to blog</a>
   </div>
 </div>
+{% if user.is_authenticated %}
 <div class="container">
   <h2>Popular Blogposts</h2>
   {% for i in allposts %}
@@ -60,7 +61,13 @@
   </div>
   {% endfor %}
 </div>
+{% else %}
+<div class="container">
+<h1>Login to read blog posts</h1>
+</div>
+{% endif %}
 <div class="container" style="text-align:center;">
   <a class="btn btn-primary btn-md mb-4" href="/blog" role="button">Read More Blogs</a>
 </div>
+
 {% endblock body %}

@@ -6,6 +6,7 @@
 <div class="container my-4">
 
     <h2>Popular articles by us</h2>
+{% if user.is_authenticated %}
 {% for post in allposts %}
     <div class="row no-gutters border rounded overflow-hidden flex-md-row my-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
@@ -20,5 +21,8 @@
         </div>
     </div>
 {% endfor %}
+{% else %}
+Login to see more
+{% endif %}
 </div>
 {% endblock body %}

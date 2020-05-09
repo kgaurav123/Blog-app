@@ -38,7 +38,13 @@
 
 
       </ul>
+     
       <div class="ml-auto form-inline">
+        <form method="get" action="/search" class=" my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" name="query" id="query"
+            aria-label="Search">
+          <button class="btn btn-outline-success my-2" type="submit">Search</button>
+        </form>
         {% if user.is_authenticated %}
         
         <ul class="navbar-nav ml-auto">
@@ -55,11 +61,7 @@
           
           <a role='button' href='/signup' class="btn btn-success m-1">Signup</a>
           {% endif %}
-          <form method="get" action="/search" class=" my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" name="query" id="query"
-              aria-label="Search">
-            <button class="btn btn-outline-success my-2" type="submit">Search</button>
-          </form>
+         
         </div>
     </div>
   </nav>
