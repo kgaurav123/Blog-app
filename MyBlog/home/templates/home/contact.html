@@ -5,7 +5,7 @@
 {% endblock contactactive %}
 {% block body %}
 {% if user.is_authenticated %}
-<div class="container my-4" style="width: 50%;">
+<div class="container my-4" style="width: 100%;">
     <h1>Contact Form</h1>
     <form method="post" action="/contact">
         {% csrf_token %}

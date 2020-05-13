@@ -27,7 +27,8 @@ def contact(request):
     return render(request,'home/contact.html')
 
 def about(request):
-    return render(request,'home/about.html')
+    user = User.objects.all()
+    return render(request,'home/about.html',{'user':user})
 def search(request):
     query=request.GET['query']
     if len(query)>78:
