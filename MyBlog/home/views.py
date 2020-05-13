@@ -6,6 +6,7 @@ from django.shortcuts import render,HttpResponse,redirect
 from.models import Contact
 from Blog.models import Post
 from django.contrib.auth import authenticate,login, logout
+from django.db import IntegrityError 
 # Create your views here.
 def home(request):
     allposts=Post.objects.all()[:2]
@@ -64,12 +65,16 @@ def handlesignup(request):
             return redirect('handlesignup')
 
         #create the user
-        myuser = User.objects.create_user(username, email, pass1)
-        myuser.first_name = fname
-        myuser.last_name = lname
-        myuser.save()
-        messages.success(request,'Your account has been successfully created,Login here')
-        return redirect('handlesignup')
+        try:
+            myuser = User.objects.create_user(username, email, pass1)
+            myuser.first_name = fname
+            myuser.last_name = lname
+            myuser.save()
+            messages.success(request,'Your account has been successfully created,Go to Login here')
+            return redirect('handlesignup')
+        except IntegrityError:
+            messages.error(request,'User with these credentials already exists')
+            return redirect('handlesignup')
     else:
         return render(request,'home/signup.html')
     
